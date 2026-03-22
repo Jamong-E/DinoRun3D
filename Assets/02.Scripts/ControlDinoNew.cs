@@ -25,9 +25,9 @@ public class ControlDinoNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(0, 0, moveSpeed));
-        if (Input.GetKey(KeyCode.A)) { transform.Translate(new Vector3(-1 * sideSpeed, 0, 0)); }
-        if (Input.GetKey(KeyCode.D)) { transform.Translate(new Vector3(sideSpeed, 0, 0)); }
+        transform.Translate(new Vector3(0, 0, moveSpeed*Time.deltaTime));
+        if (Input.GetKey(KeyCode.A)) { transform.position = new Vector3(Mathf.Clamp(transform.position.x - sideSpeed * Time.deltaTime, -3.8f, 3.8f), transform.position.y, transform.position.z); }
+        if (Input.GetKey(KeyCode.D)) { transform.position = new Vector3(Mathf.Clamp(transform.position.x + sideSpeed * Time.deltaTime, -3.8f, 3.8f), transform.position.y, transform.position.z); }
 
         /*for (int i = 0; i < transform.childCount; i++)
         {
