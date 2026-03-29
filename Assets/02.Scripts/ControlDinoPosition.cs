@@ -11,11 +11,6 @@ public class ControlDinoPosition : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnCollisionExit(Collision collision)
     {
         rb.velocity = Vector3.zero;

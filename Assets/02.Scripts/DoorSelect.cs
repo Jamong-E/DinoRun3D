@@ -28,12 +28,13 @@ public class DoorSelect : MonoBehaviour
     public Color GoodColor;
     public Color BadColor;
 
-    public GameObject Raptor;
+    GameObject Raptor;
     private bool working = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        Raptor = GameObject.Find("NewDino");
         SettingDoors();
     }
 
@@ -60,7 +61,7 @@ public class DoorSelect : MonoBehaviour
             LeftDoorSpriteRD.color = GoodColor;
             LeftDoorText.text = "+" + LeftDoorNumber;
         }
-        else if (RightDoorType.Equals(DoorType.Minus))
+        else if (LeftDoorType.Equals(DoorType.Minus))
         {
             LeftDoorSpriteRD.color = BadColor;
             LeftDoorText.text = "-" + LeftDoorNumber;

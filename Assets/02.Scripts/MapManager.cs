@@ -5,23 +5,29 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public GameObject[] PrefabMaps;
+    public GameObject Goal;
     float currentZ = -5;
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            int index = Random.Range(0, PrefabMaps.Length);
-            GameObject Map = Instantiate(PrefabMaps[index]);
-            currentZ += Map.GetComponent<MapScript>().MapZ() / 2;    // To Sum Up Both Maps' Z length
-            Map.transform.position = new Vector3(0, 0.1f*i, currentZ);
-            currentZ += Map.GetComponent<MapScript>().MapZ() / 2;
-        }
+        Goal = GameObject.FindWithTag("Goal");
+        CreateMap(5);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CreateMap(int size)
     {
-        
+        for (int i = 0; i < size; i++)
+        {
+            GameObject Map;
+            if (i == 0) { Map = Instantiate(PrefabMaps[Random.Range(0, PrefabMaps.Length)]); }
+            else { Map = Instantiate(PrefabMaps[Random.Range(0, PrefabMaps.Length)]); }
+            currentZ += Map.GetComponent<MapScript>().MapZ() / 2;    // To Sum Up Both Maps' Z length
+            Map.transform.position = new Vector3(0, 0.1f * i, currentZ);
+            currentZ += Map.GetComponent<MapScript>().MapZ() / 2;
+        }
+        currentZ += Goal.GetComponent<MapScript>().MapZ() / 2;
+        Goal.transform.position = new Vector3(0, 0, currentZ);
     }
+
+    public float GoalDistance() { return Goal.transform.position.z; }
 }
