@@ -12,7 +12,7 @@ public class ControlDinoNew : MonoBehaviour
     float angleStep = 137.508f;    // Golden Angle
     public int DinoCount = 1;
     int DinoVisual;
-    int MaxVisual = 20;
+    int MaxVisual = 50;
     public GameObject Raptors;
     public Transform Cam;
     public GameObject PrefabRaptor;
@@ -46,6 +46,7 @@ public class ControlDinoNew : MonoBehaviour
     private void DinoCircle()
     {
         for (int i = Raptors.transform.childCount; i > 0; i--) { Destroy(Raptors.transform.GetChild(i-1).gameObject); }
+        radiusStep = 0.3f / Mathf.Sqrt(DinoVisual);
         for (int i = 0; i < DinoVisual; i++)
         {
             GameObject Raptor = Instantiate(PrefabRaptor);

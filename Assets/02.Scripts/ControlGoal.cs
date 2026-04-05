@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControlGoal : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class ControlGoal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Raptor.transform.position.z > this.transform.position.z) { Debug.Log("GOAL!!!!!"); }
+        if (Raptor.transform.position.z > this.transform.position.z) {
+            PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage", 1) + 1);
+            SceneManager.LoadScene("GameScene");
+        }
     }
 }
