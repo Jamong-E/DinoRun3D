@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ControlGoal : MonoBehaviour
 {
     GameObject Raptor;
+    private bool goalin = false;
     void Start()
     {
         Raptor = GameObject.Find("NewDino");
@@ -14,9 +15,10 @@ public class ControlGoal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Raptor.transform.position.z > this.transform.position.z) {
+        if (Raptor.transform.position.z > this.transform.position.z && !goalin) {
+            goalin = true;
             PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage", 1) + 1);
-            SceneManager.LoadScene("GameScene");
+            GameManager.instance.GameClear();
         }
     }
 }

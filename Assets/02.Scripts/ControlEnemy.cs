@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ControlEnemy : MonoBehaviour
 {
-    enum State { Idle, Run }
+    enum State { Idle, Run, Dead }
 
     public GameObject Raptor;
-    private float moveSpeed = 6;
+    private float moveSpeed = 10;
     private float detectRadius = 8;
     private State state;
 
@@ -15,6 +15,7 @@ public class ControlEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Raptor = GameObject.FindWithTag("Player");
         GetComponent<Animator>().speed = 0f;
     }
 
@@ -47,9 +48,12 @@ public class ControlEnemy : MonoBehaviour
         if (Raptor == null) { return; }
         transform.LookAt(2 * this.transform.position - Raptor.transform.position);
         transform.position = Vector3.MoveTowards(transform.position, Raptor.transform.position, Time.deltaTime * moveSpeed);
-        if (Vector3.Distance(this.transform.position, Raptor.transform.position) < 0.1f) {
-            Destroy(gameObject);
+        if (Vector3.Distance(this.transform.position, Raptor.transform.position) < 0.1f)
+        {
+            // BUG : one raptor damages 0 ~ 2 times. Using a bool variable did not work.
+            state = State.Dead;
             Raptor.GetComponent<ControlDinoNew>().DinoCount -= 1;
+            Destroy(gameObject);
         }
     }
 

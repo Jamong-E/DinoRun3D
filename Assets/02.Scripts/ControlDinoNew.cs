@@ -34,6 +34,7 @@ public class ControlDinoNew : MonoBehaviour
                 transform.GetChild(i).position = new Vector3(gapX * (i + 0.5f - (float)transform.childCount / 2), 0, 0);
             }*/
             CountUI.text = DinoCount + "";
+            if (DinoCount < 1) { GameManager.instance.GameOver(); }
             if (DinoCount > MaxVisual) { DinoVisual = MaxVisual; }
             else { DinoVisual = DinoCount; }
             if ((DinoVisual < MaxVisual || Raptors.transform.childCount < MaxVisual) && DinoVisual != Raptors.transform.childCount) { DinoCircle(); }
